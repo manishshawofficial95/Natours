@@ -1,0 +1,140 @@
+@use '../abstracts/' as *;
+
+.navigation {
+
+    &__checkbox {
+        display: none;
+
+        &:checked ~ .navigation__nav {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%);
+        }
+        &:checked ~ .navigation__background {
+            transform: scale(80);
+        }
+        &:checked ~ .navigation__button .navigation__icon {
+            background: transparent;
+        }
+        &:checked ~ .navigation__button .navigation__icon::before {
+            top: 0;
+            transform: rotate(135deg);
+        }
+        &:checked ~ .navigation__button .navigation__icon::after {
+            top: 0;
+            transform: rotate(-135deg);
+        }
+    }
+
+    &__button {
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        z-index: map-get($z-index, navigation__button);
+        @include box(7rem);
+        border-radius: 50%;
+        box-shadow: 0 1rem 3rem rgba(0,0,0, .2);
+        background: #fff;
+        text-align: center;
+
+        @include mq(tablet) {
+            top: 3.5rem;
+            right: 3.5rem;
+            @include box(6rem);
+        }
+
+        &:hover .navigation__icon::before {
+            transform: translateY(-.2rem);
+        }
+        &:hover .navigation__icon::after {
+            transform: translateY(.2rem);
+        }
+    }
+
+    &__icon{
+        @include absolute-center;
+        display: inline-block;
+        @include box(3.5rem, .2rem);
+        background: #000;
+        &::before {
+            @include pseudo;
+            @include absolute(tl, -.8rem, 0);
+            background: #000;
+            transition: all .2s ease-out;
+        }
+        &::after {
+            @include pseudo;
+            @include absolute(tl, .8rem, 0);
+            background: #000;
+            transition: all .2s ease-out;
+        }
+    }
+    
+    &__background{ 
+        position: fixed;
+        top: 6.75rem;
+        right: 6.75rem;
+        z-index: map-get($z-index, navigation__background);
+        @include box(6.5rem);
+        border-radius: 50%;
+        background: radial-gradient($color-primary-light, $color-primary-dark);
+        transition: all .8s ease-out;
+
+        @include mq(tablet) {
+            top: 3.75rem;
+            right: 3.75rem;
+            @include box(5.5rem);
+        }
+    }
+
+    &__nav {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: map-get($z-index, navigation__nav);
+        transform: translate(-200%, -50%);
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    }
+    
+    &__list {
+        list-style-type: none;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    &__item {
+        margin: 1rem;
+    }
+
+    &__link {
+        &:link,
+        &:visited {
+            display: inline-block;
+            padding: 1rem 2rem;
+            color: #fff;
+            font-size: 3rem;
+            font-weight: 300;
+            text-decoration: none;
+            background: linear-gradient(120deg, transparent 50%, #fff 50%);
+            background-size: 220%;
+            transition: all .2s ease-out;
+            
+            & span {
+                padding-right: 2rem;
+            }
+            
+            @include mq(tablet) {
+                font-size: 2.5rem;
+            }
+        }
+        &:hover,
+        &:active {
+            color: $color-primary;
+            background-position: right;
+            transform: translateX(1rem);
+        }
+    }
+}

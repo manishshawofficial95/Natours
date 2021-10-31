@@ -1,0 +1,177 @@
+@use '../abstracts/' as *;
+
+.card {
+    position: relative;
+    // both children are absolute positioned so height is 0 ↓
+    min-height: 53rem;
+    // put on the parent of the element using transform property ↓
+    perspective: 150rem;
+
+    &:hover &__side--front {
+        transform: rotateY(-180deg);
+    }
+    &:hover &__side--back {
+        transform: rotateY(0deg);
+    }
+    &__side {
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .1);
+        transition: all .5s linear;
+        @include absolute;
+        @include box(100%);
+        border-radius: 3px;
+        overflow: hidden;
+        backface-visibility: hidden;
+
+        &--front {           
+            background: #fff;
+        }
+
+        &--back {
+            z-index: -1;
+            transform: rotateY(180deg);
+            @include flex-center-column(both);
+        }
+
+        &--back-1 {
+            background: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+        }
+        &--back-2 {
+            background: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+        }
+        &--back-3 {
+            background: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
+        }
+    }
+
+    &__picture {
+        position: relative;
+        height: 23rem;
+        background-blend-mode: screen;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        background-size: cover !important;
+
+        &--1 {
+            background: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark),
+                 url(../img/nat-5.jpg);
+        }
+        &--2 {
+            background: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark),
+                url(../img/nat-6.jpg);
+        }
+        &--3 {
+            background: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark),
+                url(../img/nat-7.jpg);
+        }
+    }
+
+    &__price-box {
+        color: #fff;
+        text-align: center;
+    }
+
+    &__price-only {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+    }
+    
+    &__price-value {
+        font-size: 6rem;
+        font-weight: 100;
+        margin-bottom: 8rem;
+    }
+
+    &__heading {
+        @include absolute(tr, 12rem, 2rem);
+        // to make the text go to the next line ↓
+        width: 80%;
+        color: white;
+        font-size: 2.8rem;
+        font-weight: 300;
+        text-align: right;
+        text-transform: uppercase;
+
+        @include mq(tablet) {
+            width: 100%;
+        }
+    }
+
+    &__heading-span {
+        padding: 1rem 1.5rem;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+
+        &--1 {
+            background: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark),
+        }
+        &--2 {
+            background: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark),
+        }
+        &--3 {
+            background: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark),
+        }
+    }
+
+    &__details {
+        padding: 2.5rem 0;
+
+        ul {
+            list-style-type: none;
+            width: 80%;
+            margin: 0 auto;
+            
+            li {
+                text-align: center;
+                padding: 1rem;
+            }
+            li:not(:last-child) {
+                border-bottom: 1px solid #eee;
+            }
+        }
+    }
+}
+
+// MEDIA QUERY
+
+// @include mq(tablet) {
+@media only screen and (max-width: 56.25em),
+       only screen and (hover: none) {
+
+    .card {
+        height: auto;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .1);
+
+        &:hover &__side--front { 
+            transform: rotateY(0deg);
+        }
+        
+        &__side {
+            position: relative;
+            height: auto;
+            box-shadow: none;
+
+            &--front {           
+                padding-bottom: 3rem; 
+            }
+            &--back {
+                z-index: auto;
+                transform: rotateY(0deg);
+
+                margin-top: -6rem;
+                height: auto;
+                padding: 4rem 0;
+                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+        
+        &__price-value {    
+            font-size: 4rem;
+            margin-bottom: 3rem;
+        }
+    }
+}
+
+@include mq(mobile) {
+    .card__heading {
+        font-size: 2.3rem;
+    }
+}

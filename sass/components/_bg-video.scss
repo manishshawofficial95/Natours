@@ -1,0 +1,14 @@
+@use '../abstracts/' as *;
+
+.bg-video {
+    z-index: -10;
+    @include absolute(tl);
+    @include box(100%);
+    opacity: .2;
+
+    &__content {
+        @include box(100%);
+        // Object fit value defines how the content will fill into its own defined dimensions ↓
+        object-fit: cover;
+    }
+}

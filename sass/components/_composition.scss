@@ -1,0 +1,64 @@
+@use '../abstracts/' as *;
+
+.composition {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    --scale: 1;
+
+    @include mq(tablet) {
+        height: 20rem;
+    }
+
+    &__photo {
+        width: 30rem;
+        border-radius: 3px;
+        box-shadow: 0 1rem 3rem rgba(0,0,0, 40%);
+        transition: all .2s ease-out;
+
+        @include mq(tablet) {
+            width: 25rem;
+        }
+        @include mq(mobile) {
+            width: 20rem;
+        }
+
+        &:hover{
+            z-index: 10;
+            outline: 1.2rem solid $color-primary;
+            outline-offset: 2rem;
+            --scale: 1.1;
+        }
+        
+        &--1 {
+            @include absolute(tl, -2rem, 0);
+            transform: scale(var(--scale));
+
+            @include mq(tablet) {
+                top: 0;
+            }
+        }
+
+        &--2 {
+            @include absolute(tr, 2rem, 0);
+            transform: scale(var(--scale));
+
+            @include mq(tablet) {
+                top: 0;
+            }
+        }
+
+        &--3 {
+            @include absolute(tl, 10rem, 50%); 
+            transform: translateX(-50%) scale(var(--scale));  
+            
+            @include mq(tablet) {
+                top: 5rem;
+            }
+        }
+    }
+    
+    &:hover &__photo:not(:hover) {
+        --scale: .95;
+    }
+}

@@ -1,0 +1,30 @@
+@use '../abstracts/' as *;
+
+.u-mar-btm-small { 
+    margin-bottom: 1.5rem !important; 
+}
+
+.u-mar-btm {
+    margin-bottom: 3rem !important; 
+}
+
+.u-mar-btm-big { 
+    margin-bottom: 8rem !important;
+
+    @include mq(tablet) {
+        margin-bottom: 6rem !important; 
+    } 
+
+}
+
+.u-mar-btm-huge { 
+    margin-bottom: 10rem !important; 
+
+    @include mq(tablet) {
+        margin-bottom: 8rem !important; 
+    }
+}
+
+.u-center-text {
+    text-align: center !important;
+}

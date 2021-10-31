@@ -1,0 +1,21 @@
+// VARIABLES
+$color-primary: #55C57A;
+$color-primary-light: #7ED56F;
+$color-primary-dark: #28B485;
+
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+
+$color-tertiary-light: #2998ff;
+$color-tertiary-dark: #5643fa;
+
+$color-grey-light: #f7f7f7;
+$color-grey-dark: #999;
+
+// MAPS
+$z-index : (
+    navigation__button : 1000,
+    navigation__background: 800,
+    navigation__nav: 900,
+    popup: 2000
+);
